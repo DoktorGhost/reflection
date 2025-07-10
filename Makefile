@@ -11,7 +11,6 @@ proto: generate-go-data-v1-api generate-go-service-api
 generate-go-data-v1-api:
 	mkdir -p src/go/pkg/grpc/data/v1
 	GOBIN=$(LOCAL_BIN) protoc \
-    --proto_path api/grpc/protobuf/data/v1 \
     --go_out=src/go/pkg/grpc/data/v1 \
     --go_opt=paths=source_relative \
     --go-grpc_out=src/go/pkg/grpc/data/v1 \
@@ -24,8 +23,6 @@ generate-go-data-v1-api:
 generate-go-service-api:
 	mkdir -p src/go/pkg/grpc/service_1
 	GOBIN=$(LOCAL_BIN) protoc \
-	--proto_path . \
-	--proto_path api/grpc/protobuf/service_1 \
 	--go_out=src/go/pkg/grpc/service_1 \
 	--go_opt=paths=source_relative \
 	--go-grpc_out=src/go/pkg/grpc/service_1 \

@@ -8,7 +8,7 @@ package service_1
 
 import (
 	context "context"
-	v1 "github.com/DoktorGhost/reflection/src/go/pkg/grpc/data/v1"
+	v1 "github.com/DoktorGhost/reflection/src/go/pkg/grpc/data/v1/api/grpc/protobuf/data/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

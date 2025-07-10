@@ -7,7 +7,7 @@
 package service_1
 
 import (
-	v1 "github.com/DoktorGhost/reflection/src/go/pkg/grpc/data/v1"
+	v1 "github.com/DoktorGhost/reflection/src/go/pkg/grpc/data/v1/api/grpc/protobuf/data/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

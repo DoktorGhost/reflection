@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	v1 "github.com/DoktorGhost/reflection/src/go/pkg/grpc/data/v1"
+	v1 "github.com/DoktorGhost/reflection/src/go/pkg/grpc/data/v1/api/grpc/protobuf/data/v1"
 	"github.com/DoktorGhost/reflection/src/go/pkg/grpc/service_1/api/grpc/protobuf/service_1"
 
 	"log"
