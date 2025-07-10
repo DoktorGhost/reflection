@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: api/grpc/protobuf/service_1/service_1.proto
 
-package service_v1
+package service_1
 
 import (
 	context "context"
@@ -12,7 +12,6 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -21,8 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	OneService_GetOther_FullMethodName    = "/combo.OneService/GetOther"
-	OneService_GetAnyOther_FullMethodName = "/combo.OneService/GetAnyOther"
+	OneService_GetOther_FullMethodName = "/combo.OneService/GetOther"
 )
 
 // OneServiceClient is the client API for OneService service.
@@ -30,7 +28,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OneServiceClient interface {
 	GetOther(ctx context.Context, in *v1.DataOneRequest, opts ...grpc.CallOption) (*v1.DataOneResponse, error)
-	GetAnyOther(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error)
 }
 
 type oneServiceClient struct {
@@ -51,22 +48,11 @@ func (c *oneServiceClient) GetOther(ctx context.Context, in *v1.DataOneRequest, 
 	return out, nil
 }
 
-func (c *oneServiceClient) GetAnyOther(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, OneService_GetAnyOther_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // OneServiceServer is the server API for OneService service.
 // All implementations must embed UnimplementedOneServiceServer
 // for forward compatibility
 type OneServiceServer interface {
 	GetOther(context.Context, *v1.DataOneRequest) (*v1.DataOneResponse, error)
-	GetAnyOther(context.Context, *emptypb.Empty) (*GetResponse, error)
 	mustEmbedUnimplementedOneServiceServer()
 }
 
@@ -76,9 +62,6 @@ type UnimplementedOneServiceServer struct {
 
 func (UnimplementedOneServiceServer) GetOther(context.Context, *v1.DataOneRequest) (*v1.DataOneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOther not implemented")
-}
-func (UnimplementedOneServiceServer) GetAnyOther(context.Context, *emptypb.Empty) (*GetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAnyOther not implemented")
 }
 func (UnimplementedOneServiceServer) mustEmbedUnimplementedOneServiceServer() {}
 
@@ -111,24 +94,6 @@ func _OneService_GetOther_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OneService_GetAnyOther_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OneServiceServer).GetAnyOther(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OneService_GetAnyOther_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OneServiceServer).GetAnyOther(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // OneService_ServiceDesc is the grpc.ServiceDesc for OneService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -140,18 +105,13 @@ var OneService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetOther",
 			Handler:    _OneService_GetOther_Handler,
 		},
-		{
-			MethodName: "GetAnyOther",
-			Handler:    _OneService_GetAnyOther_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "api/grpc/protobuf/service_1/service_1.proto",
 }
 
 const (
-	TwoService_GetOther_FullMethodName    = "/combo.TwoService/GetOther"
-	TwoService_GetAnyOther_FullMethodName = "/combo.TwoService/GetAnyOther"
+	TwoService_GetOther_FullMethodName = "/combo.TwoService/GetOther"
 )
 
 // TwoServiceClient is the client API for TwoService service.
@@ -159,7 +119,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TwoServiceClient interface {
 	GetOther(ctx context.Context, in *v1.DataTwoRequest, opts ...grpc.CallOption) (*v1.DataTwoResponse, error)
-	GetAnyOther(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error)
 }
 
 type twoServiceClient struct {
@@ -180,22 +139,11 @@ func (c *twoServiceClient) GetOther(ctx context.Context, in *v1.DataTwoRequest, 
 	return out, nil
 }
 
-func (c *twoServiceClient) GetAnyOther(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, TwoService_GetAnyOther_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // TwoServiceServer is the server API for TwoService service.
 // All implementations must embed UnimplementedTwoServiceServer
 // for forward compatibility
 type TwoServiceServer interface {
 	GetOther(context.Context, *v1.DataTwoRequest) (*v1.DataTwoResponse, error)
-	GetAnyOther(context.Context, *emptypb.Empty) (*GetResponse, error)
 	mustEmbedUnimplementedTwoServiceServer()
 }
 
@@ -205,9 +153,6 @@ type UnimplementedTwoServiceServer struct {
 
 func (UnimplementedTwoServiceServer) GetOther(context.Context, *v1.DataTwoRequest) (*v1.DataTwoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOther not implemented")
-}
-func (UnimplementedTwoServiceServer) GetAnyOther(context.Context, *emptypb.Empty) (*GetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAnyOther not implemented")
 }
 func (UnimplementedTwoServiceServer) mustEmbedUnimplementedTwoServiceServer() {}
 
@@ -240,24 +185,6 @@ func _TwoService_GetOther_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TwoService_GetAnyOther_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(TwoServiceServer).GetAnyOther(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: TwoService_GetAnyOther_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TwoServiceServer).GetAnyOther(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // TwoService_ServiceDesc is the grpc.ServiceDesc for TwoService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -269,18 +196,13 @@ var TwoService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetOther",
 			Handler:    _TwoService_GetOther_Handler,
 		},
-		{
-			MethodName: "GetAnyOther",
-			Handler:    _TwoService_GetAnyOther_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "api/grpc/protobuf/service_1/service_1.proto",
 }
 
 const (
-	ThreeService_GetOther_FullMethodName    = "/combo.ThreeService/GetOther"
-	ThreeService_GetAnyOther_FullMethodName = "/combo.ThreeService/GetAnyOther"
+	ThreeService_GetOther_FullMethodName = "/combo.ThreeService/GetOther"
 )
 
 // ThreeServiceClient is the client API for ThreeService service.
@@ -288,7 +210,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ThreeServiceClient interface {
 	GetOther(ctx context.Context, in *v1.DataThreeRequest, opts ...grpc.CallOption) (*v1.DataThreeResponse, error)
-	GetAnyOther(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error)
 }
 
 type threeServiceClient struct {
@@ -309,22 +230,11 @@ func (c *threeServiceClient) GetOther(ctx context.Context, in *v1.DataThreeReque
 	return out, nil
 }
 
-func (c *threeServiceClient) GetAnyOther(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, ThreeService_GetAnyOther_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ThreeServiceServer is the server API for ThreeService service.
 // All implementations must embed UnimplementedThreeServiceServer
 // for forward compatibility
 type ThreeServiceServer interface {
 	GetOther(context.Context, *v1.DataThreeRequest) (*v1.DataThreeResponse, error)
-	GetAnyOther(context.Context, *emptypb.Empty) (*GetResponse, error)
 	mustEmbedUnimplementedThreeServiceServer()
 }
 
@@ -334,9 +244,6 @@ type UnimplementedThreeServiceServer struct {
 
 func (UnimplementedThreeServiceServer) GetOther(context.Context, *v1.DataThreeRequest) (*v1.DataThreeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOther not implemented")
-}
-func (UnimplementedThreeServiceServer) GetAnyOther(context.Context, *emptypb.Empty) (*GetResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAnyOther not implemented")
 }
 func (UnimplementedThreeServiceServer) mustEmbedUnimplementedThreeServiceServer() {}
 
@@ -369,24 +276,6 @@ func _ThreeService_GetOther_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ThreeService_GetAnyOther_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ThreeServiceServer).GetAnyOther(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ThreeService_GetAnyOther_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ThreeServiceServer).GetAnyOther(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ThreeService_ServiceDesc is the grpc.ServiceDesc for ThreeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -397,10 +286,6 @@ var ThreeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOther",
 			Handler:    _ThreeService_GetOther_Handler,
-		},
-		{
-			MethodName: "GetAnyOther",
-			Handler:    _ThreeService_GetAnyOther_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
