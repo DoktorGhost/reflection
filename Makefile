@@ -6,38 +6,31 @@ install-go-deps:
 	GOBIN=$(LOCAL_BIN) go install github.com/bufbuild/buf/cmd/buf@v1.50.0
 	GOBIN=$(LOCAL_BIN) go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc@v1.5.1
 
-generate: install-go-deps
-	GOBIN=$(LOCAL_BIN) buf generate
+proto: generate-go-data-v1-api generate-go-service-api
 
-proto: generate-go-common-v1-api generate-go-combo_service_v1-api
-
-generate-go-common-v1-api:
-	mkdir -p src/go/pkg/grpc/common/v1
+generate-go-data-v1-api:
+	mkdir -p src/go/pkg/grpc/data/v1
 	GOBIN=$(LOCAL_BIN) protoc \
-    	--proto_path api/grpc/protobuf/common/v1 \
-    	--go_out=src/go/pkg/grpc/common/v1 \
-    	--go_opt=paths=source_relative \
-    	--go-grpc_out=src/go/pkg/grpc/common/v1 \
-    	--go-grpc_opt=paths=source_relative \
-    	--plugin=protoc-gen-go=bin/protoc-gen-go \
-    	--plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
-    	--plugin=protoc-gen-doc=bin/protoc-gen-doc \
-    	--doc_out=api/grpc/protobuf/common/v1 \
-    	--doc_opt=markdown,README.md,source_relative \
-    	api/grpc/protobuf/common/v1/*.proto
+    --proto_path api/grpc/protobuf/data/v1 \
+    --go_out=src/go/pkg/grpc/data/v1 \
+    --go_opt=paths=source_relative \
+    --go-grpc_out=src/go/pkg/grpc/data/v1 \
+    --go-grpc_opt=paths=source_relative \
+    --plugin=protoc-gen-go=bin/protoc-gen-go \
+    --plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
+    --plugin=protoc-gen-doc=bin/protoc-gen-doc \
+    api/grpc/protobuf/data/v1/*.proto
 
-generate-go-combo_service_v1-api:
-	mkdir -p src/go/pkg/grpc/combo_service
+generate-go-service-api:
+	mkdir -p src/go/pkg/grpc/service_1
 	GOBIN=$(LOCAL_BIN) protoc \
 	--proto_path . \
-	--proto_path api/grpc/protobuf/combo_service_v1 \
-	--go_out=src/go/pkg/grpc/combo_service \
+	--proto_path api/grpc/protobuf/service_1 \
+	--go_out=src/go/pkg/grpc/service_1 \
 	--go_opt=paths=source_relative \
-	--go-grpc_out=src/go/pkg/grpc/combo_service \
+	--go-grpc_out=src/go/pkg/grpc/service_1 \
 	--go-grpc_opt=paths=source_relative \
 	--plugin=protoc-gen-go=bin/protoc-gen-go \
 	--plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
 	--plugin=protoc-gen-doc=bin/protoc-gen-doc \
-	--doc_out=. \
-	--doc_opt=markdown,README.md,source_relative \
-	api/grpc/protobuf/combo_service_v1/*.proto
+	api/grpc/protobuf/service_1/*.proto

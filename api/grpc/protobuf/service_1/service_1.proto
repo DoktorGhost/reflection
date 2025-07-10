@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package combo;
+
+import "api/grpc/protobuf/data/v1/data_1.proto";
+import "api/grpc/protobuf/data/v1/data_2.proto";
+import "api/grpc/protobuf/data/v1/data_3.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/DoktorGhost/reflection/src/go/pkg/grpc/service_v1";
+
+service OneService {
+  rpc GetOther(data.one.DataOneRequest) returns (data.one.DataOneResponse);
+  rpc GetAnyOther(google.protobuf.Empty) returns (GetResponse);
+}
+
+service TwoService {
+  rpc GetOther(data.two.DataTwoRequest) returns (data.two.DataTwoResponse);
+  rpc GetAnyOther(google.protobuf.Empty) returns (GetResponse);
+}
+
+service ThreeService {
+  rpc GetOther(data.three.DataThreeRequest) returns (data.three.DataThreeResponse);
+  rpc GetAnyOther(google.protobuf.Empty) returns (GetResponse);
+}
+
+message GetResponse {
+  int64 id = 1;
+};

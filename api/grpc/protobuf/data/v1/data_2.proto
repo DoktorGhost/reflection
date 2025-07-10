@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package data.two;
+
+option go_package = "github.com/DoktorGhost/reflection/src/go/pkg/grpc/data/v1;data_v1";
+
+message DataTwoRequest {
+  int64 one = 1;
+  int64 two = 2;
+}
+
+message DataTwoResponse {
+  int64 one = 1;
+  int64 two = 2;
+}
